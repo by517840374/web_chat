@@ -9,6 +9,89 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUseGetUserProfile: false,
+    chaX: 0,// 转换值X
+    chaY: 0,// 转换值Y
+    touch: false, // 触摸标记
+    posX:100, // 初始位置
+    posY:20, // 初始位置
+    text: "Controlnet",
+    control_id: 0,
+    lora_id: 0,
+    selectArray: [
+      {
+          "id": "01",
+          "text": "停车A区"
+      }, 
+      {
+          "id": "02",
+          "text": "停车B区"
+      }
+  ]
+  },
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const form_data = e.detail.value;
+    form_data["lora_id"] = this.data.lora_id;
+    form_data["controlent_id"] = this.data.control_id;
+    console.log(form_data);
+    // send data to server
+    app.util.request({
+        url: '/auth/test',
+        method: "POST",
+        data: form_data
+    }).then(res => {
+      console.log(res.data);
+    })
+  },
+  getDate:function(e){
+      console.log(e)
+      if(e.detail.text == "Controlnet"){
+        this.setData({
+          "control_id": e.detail.id
+        })
+      }else{
+        this.setData({
+          "lora_id": e.detail.id
+        })
+      }
+  },
+  // 开始触摸
+  touchStart: function (e) {
+      console.log("== touchStart ==");// 拖动开始
+      // e.touches[0] 内容就是触摸点的坐标值
+      var tranX = e.touches[0].pageX-this.data.posX;
+      var tranY = e.touches[0].pageY-this.data.posY;
+      console.log("start tranX: " + tranX);
+      console.log("start tranY: " + tranY);
+      // 存储chaX和chaY 并设置 touch: true
+      this.setData({
+          touch:true, 
+          chaX:tranX,
+          chaY:tranY
+      });
+  },
+  // 触摸移动
+  touchMove: function (e) {
+      if (!this.data.touch) return;
+      // e.touches[0] 内容就是触摸点的坐标值
+      var new_posX = e.touches[0].pageX-this.data.chaX;
+      var new_posY = e.touches[0].pageY-this.data.chaY;
+      console.log(" move new_posX: " + new_posX);
+      console.log(" move nwe_posY: " + new_posY);
+      this.setData({
+          posX:new_posX,
+          posY:new_posY
+      });
+  },
+  // 触摸结束
+  touchEnd: function (e) {
+      console.log("== touchEnd ==")
+      if (!this.data.touch) return;
+      this.setData({
+          touch:false,
+          chaX:0,
+          chaY:0
+      });
   },
 
   /**
@@ -22,64 +105,40 @@ Page({
     }
   },
 
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+  login(){
+    wx.login({
+      success(res){
+        if(res.code){
+          console.log(res);
+          app.util.request({
+              url: '/auth/onlogin',
+              method: "POST",
+              data: {
+                code: res.code
+              }
+          }).then(res => {
+            console.log(res.data);
+          })
+        }else{
+          console.log("登录失败" + res.errMsg)
+        }
       }
-    })
-  },
-  getUserInfo(e) {
-    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-      wx.login({
-        success(res){
-          if(res.code){
-            console.log(res);
-            app.util.request({
-                url: '/auth/onlogin',
-                method: "POST",
-                data: {
-                  code: res.code
-                }
-            }).then(res => {
-              console.log(res.data);
-            })
-          }else{
-            console.log("登录失败" + res.errMsg)
-          }
-        }
-      })
-
+      
       wx.checkSession({
         success(){
           console.log("登录中。。。")
         },
         fail(){
+          login();
           console.log("掉线了哟")
         }
-      })
-
-      const accountInfo = wx.getAccountInfoSync();
-      console.log(accountInfo.miniProgram.appId);
-      console.log(accountInfo.plugin.appId);
-      console.log(accountInfo.plugin.version);
-
-      
+      })      
 
   },
 

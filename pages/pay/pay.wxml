@@ -99,3 +99,16 @@
     </block>
     
 </view>
+
+<text>pages/login/login.wxml</text>
+<button type="primary" open-type="chooseAvatar" bindchooseavatar="getChooseAvatar" >获取头像</button>
+
+<form bindsubmit="userInfoLogin">
+  <input name="nickname" type="nickname" class="calculate-input" placeholder="请输入昵称" value="{{nickName}}"   />
+  <button class="move-anim-box weight-save" type="primary" form-type="submit">保存</button>
+</form>
+<view class="stick" style="position: absolute; text-align: center; width: 200rpx; height:50rpx;background: rgb(100, 180, 100);display: block;left:{{posX}}px;top:{{posY}}px" bindtouchmove="touchMove" bindtouchstart="touchStart" bindtouchend="touchEnd" >
+        <view>SD</view>
+        <Select prop-array='{{selectArray}}' text="Controlnet" bind:myget='getDate'></Select>
+        <button>发送</button>
+</view>

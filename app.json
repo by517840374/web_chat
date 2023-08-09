@@ -4,7 +4,9 @@
     "pages/index/index",
     "pages/pay/pay",
     "pages/webview/webview",
-    "pages/login"
+    "pages/login",
+    "pages/select/select",
+    "pages/components/select/select"
   ],
   "window": {
     "navigationBarTitleText": "ChatGPT聊天",
