@@ -11,7 +11,6 @@ Page({
         shareImage: ''
     },
     onLoad(options) {
-        console.log('options', options)
         if (options.sid) {
             // 分享id
             wx.setStorageSync('sid', options.sid)
@@ -20,11 +19,11 @@ Page({
         this.setData({
             system: app.globalData.system
         })
-        app.util.login().then(() => {
-            this.getWxappInfo()
-            this.getHistoryMsg()
-            this.getBalance()
-        })
+        // app.util.login().then(() => {
+        //     this.getWxappInfo()
+        //     this.getHistoryMsg()
+        //     this.getBalance()
+        // })
     },
     onShow() {
         setTimeout(() => {
@@ -33,7 +32,7 @@ Page({
     },
     getHistoryMsg() {
         app.util.request({
-            url: '/wxapp/getHistoryMsg'
+            url: '/project/getHistoryMsg'
         }).then(res => {
             if (res.data.length > 0) {
                 this.setData({
@@ -45,14 +44,18 @@ Page({
         })
     },
     getBalance() {
-        app.util.request({
-            url: '/wxapp/getBalance',
-            loading: false
-        }).then(res => {
-            this.setData({
-                balance: res.data.balance,
-                vip_expire_time: res.data.vip_expire_time
-            })
+        // app.util.request({
+        //     url: '/project/getBalance',
+        //     loading: false
+        // }).then(res => {
+        //     this.setData({
+        //         balance: res.data.balance,
+        //         vip_expire_time: res.data.vip_expire_time
+        //     })
+        // })
+        this.setData({
+            balance: "10000",
+            vip_expire_time: ""
         })
     },
     sendText() {
@@ -61,62 +64,110 @@ Page({
             console.log('no input')
             return;
         }
-        // 过滤敏感词
+        //var clearMessage = res.data
+        var lists = this.data.lists
+        console.log(message);
+        lists.push({
+            user: '我',
+            message: message.split("\n")
+        })
+        lists.push({
+            user: 'ChatGPT',
+            message: ['正在输入..']
+        })
+
+        this.setData({
+            message: '',
+            lists: lists
+        })
+
+        this.scrollToBottom()
         app.util.request({
-            url: '/wxapp/wordFilter',
-            data: {
-                message: message
-            },
-            loading: true
+          url: '/project/chat',
+          data: {
+              message: message
+          },
+          loading: false,
+          timeout: 120000
         }).then(res => {
-            var clearMessage = res.data
-            var lists = this.data.lists
-            lists.push({
-                user: '我',
-                message: clearMessage.split("\n")
-            })
+            console.log(res);
+            lists = lists.slice(0, -1)
             lists.push({
                 user: 'ChatGPT',
-                message: ['正在输入..']
+                message: res.data.split("\n")
             })
-
             this.setData({
-                message: '',
                 lists: lists
             })
 
             this.scrollToBottom()
-
-            app.util.request({
-                url: '/wxapp/sendText',
-                data: {
-                    message: message
-                },
-                loading: false,
-                timeout: 120000
-            }).then(res => {
-                lists = lists.slice(0, -1)
-                lists.push({
-                    user: 'ChatGPT',
-                    message: res.data
-                })
-                this.setData({
-                    lists: lists
-                })
-
-                this.scrollToBottom()
-                this.getBalance()
-            }).catch(res => {
-                lists = lists.slice(0, -1)
-                lists.push({
-                    user: 'ChatGPT',
-                    message: ['网络错误，本条消息不扣费。']
-                })
-                this.setData({
-                    lists: lists
-                })
+            this.getBalance()
+        }).catch(res => {
+            lists = lists.slice(0, -1)
+            lists.push({
+                user: 'ChatGPT',
+                message: ['网络错误，本条消息不扣费。']
+            })
+            this.setData({
+                lists: lists
             })
         })
+        // 过滤敏感词
+        // app.util.request({
+        //     url: '/project/wordFilter',
+        //     data: {
+        //         message: message
+        //     },
+        //     loading: true
+        // }).then(res => {
+        //     var clearMessage = res.data
+        //     var lists = this.data.lists
+        //     lists.push({
+        //         user: '我',
+        //         message: clearMessage.split("\n")
+        //     })
+        //     lists.push({
+        //         user: 'ChatGPT',
+        //         message: ['正在输入..']
+        //     })
+
+        //     this.setData({
+        //         message: '',
+        //         lists: lists
+        //     })
+
+        //     this.scrollToBottom()
+
+        //     app.util.request({
+        //         url: '/project/sendText',
+        //         data: {
+        //             message: message
+        //         },
+        //         loading: false,
+        //         timeout: 120000
+        //     }).then(res => {
+        //         lists = lists.slice(0, -1)
+        //         lists.push({
+        //             user: 'ChatGPT',
+        //             message: res.data
+        //         })
+        //         this.setData({
+        //             lists: lists
+        //         })
+
+        //         this.scrollToBottom()
+        //         this.getBalance()
+        //     }).catch(res => {
+        //         lists = lists.slice(0, -1)
+        //         lists.push({
+        //             user: 'ChatGPT',
+        //             message: ['网络错误，本条消息不扣费。']
+        //         })
+        //         this.setData({
+        //             lists: lists
+        //         })
+        //     })
+        // })
     },
     sendConfirm() {
         setTimeout(() => {
@@ -153,7 +204,7 @@ Page({
         const _this = this
         return new Promise(function (resolve, reject) {
             app.util.request({
-                url: '/wxapp/getWxappInfo',
+                url: '/project/getWxappInfo',
                 loading: false
             }).then(res => {
                 // 设置页面标题

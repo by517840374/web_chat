@@ -33,7 +33,7 @@ Page({
 
     getGoodsList() {
         app.util.request({
-            url: '/wxapp/getGoodsList'
+            url: '/project/getGoodsList'
         }).then(res => {
             const goodsList = res.data
             goodsList.forEach(item => {

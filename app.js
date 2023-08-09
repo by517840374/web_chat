@@ -1,6 +1,6 @@
 App({
   onLaunch: function () {
-    this.globalData.siteroot = this.siteinfo.host + '/api.php';
+    this.globalData.siteroot = this.siteinfo.host;
     if (this.siteinfo.site_id) {
       this.globalData.site_id = this.siteinfo.site_id;
     }

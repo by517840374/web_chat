@@ -25,15 +25,18 @@ util.request = function (option) {
     if (app.globalData.site_id) {
         data.site_id = app.globalData.site_id
     }
+    console.log(data);
     return new Promise(function (resolve, reject) {
         wx.request({
             url: url,
             data: data,
             method: option.method ? option.method : 'POST',
-            dataType: 'json',
+            //dataType: 'json',
             header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-Token': wx.getStorageSync('token')
+                //'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
+                //'X-Token': wx.getStorageSync('token')
+                'Authorization': "Bearer 4moIZYoVVIcR9BR6nYMCPKBQEgjV4E"
             },
             timeout: option.timeout ? option.timeout : 60000,
             success: function (res) {
@@ -78,24 +81,24 @@ util.login = function () {
                 success: function (e) {
                     var code = e.code
                     util.request({
-                        url: '/wxapp/login',
+                        url: '/project/login',
                         data: {
                             code: code,
                             sid: parseInt(sid)
                         }
-                    }).then(res => {
-                        wx.setStorageSync('token', res.data.token)
-                        if (sid) {
-                            wx.removeStorageSync('sid')
-                        }
-                        resolve()
-                    }).catch(res => {
-                        util.message(res.message, 'error', function () {
-                            setTimeout(() => {
-                                util.login()
-                            }, 1000)
-                        })
-                    })
+                    })//.then(res => {
+                    //     wx.setStorageSync('token', res.data.token)
+                    //     if (sid) {
+                    //         wx.removeStorageSync('sid')
+                    //     }
+                    //     resolve()
+                    // }).catch(res => {
+                    //     util.message(res.message, 'error', function () {
+                    //         setTimeout(() => {
+                    //             util.login()
+                    //         }, 1000)
+                    //     })
+                    // })
                 }
             })
         })

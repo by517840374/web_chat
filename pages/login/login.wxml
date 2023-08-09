@@ -1,0 +1,21 @@
+<!--pages/login/login.wxml-->
+<text>pages/login/login.wxml</text>
+<button type="primary" open-type="chooseAvatar" bindchooseavatar="getChooseAvatar" >获取头像</button>
+
+<form bindsubmit="userInfoLogin">
+  <input name="nickname" type="nickname" class="calculate-input" placeholder="请输入昵称" value="{{nickName}}"   />
+  <button class="move-anim-box weight-save" type="primary" form-type="submit">保存</button>
+</form>
+
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+</view>
