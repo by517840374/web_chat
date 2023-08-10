@@ -1,63 +1,87 @@
 <view class="container">
   <view class="page-body">
     <form catchsubmit="formSubmit" catchreset="formReset">
-      <view class="section">
-        提示词：
-        <textarea bindblur="bindTextAreaBlur" style="border: 1px solid #000;" name="prompt" />
+      <view class="userShow">
+        <view class="display_text">提示词：</view>
+        <view class="textarea-box">
+          <textarea placeholder="图片中展现的词" class="input" name="prompt" />
+        </view>
       </view>
-      <view class="section">
-        反向文本：
-        <textarea style="border: 1px solid #000;" name="negative_prompt" />
+      <view class="userShow">
+        <view class="display_text">反向文本：</view>
+        <view class="textarea-box">
+          <textarea placeholder="(不想在图片中出现的词)" class="input" name="negative_prompt" />
+        </view>
       </view>
+
       <view class="section section_gap">
-          <text class="section__title">width：</text>
+          <text class="display_text">width：</text>
           <view class="body-view">
-              <slider bindchange="slider3change" show-value max="1024" min="0" value="512" step="8" name="width" />
+              <slider class="slider-light" bindchange="slider3change" block-size="30" show-value max="1024" min="0" value="512" step="8" name="width" />
+          </view>
+      </view>
+
+      <view class="section section_gap">
+          <text class="display_text">height:</text>
+          <view class="body-view">
+              <slider class="slider-light" bindchange="slider3change" show-value max="1024" min="0" value="512" step="8" name="height" />
           </view>
       </view>
       <view class="section section_gap">
-          <text class="section__title">height:</text>
+          <text class="display_text">生成图片数量：</text>
           <view class="body-view">
-              <slider bindchange="slider3change" show-value max="1024" min="0" value="512" step="8" name="height" />
+              <slider class="slider-light" bindchange="slider3change" show-value max="20" min="1" value="1" name="num_samples" />
           </view>
       </view>
       <view class="section section_gap">
-          <text class="section__title">生成图片数量：</text>
+          <text class="display_text">guidance_scale</text>
           <view class="body-view">
-              <slider bindchange="slider3change" show-value max="20" min="1" value="1" name="num_samples" />
+              <slider class="slider-light" bindchange="slider3change" show-value max="20" step="0.1" value="7.5" name="guidance_scale" />
           </view>
       </view>
       <view class="section section_gap">
-          <text class="section__title">guidance_scale</text>
+          <text class="display_text">图片影响度(strength/for img to img)：</text>
           <view class="body-view">
-              <slider bindchange="slider3change" show-value max="20" step="0.1" value="7.5" name="guidance_scale" />
+              <slider class="slider-light" bindchange="slider3change" show-value max="1" value="0.8" step="0.1" name="strength" />
           </view>
       </view>
       <view class="section section_gap">
-          <text class="section__title">强度(strength/for img to img)：</text>
+          <text class="display_text">推理步长(steps)：</text>
           <view class="body-view">
-              <slider bindchange="slider3change" show-value max="1" value="0.8" step="0.1" name="strength" />
-          </view>
-      </view>
-      <view class="section section_gap">
-          <text class="section__title">推理步长(steps)：</text>
-          <view class="body-view">
-              <slider bindchange="slider3change" show-value max="100" value="20" step="1" name="num_inference_steps" />
+              <slider class="slider-light" bindchange="slider3change" show-value max="100" value="20" step="1" name="num_inference_steps" />
           </view>
       </view>
       <view class="page-section">
-        <view class="weui-cells__title">seed</view>
+        <view class="display_text">seed</view>
         <view class="weui-cells weui-cells_after-title">
-          <view class="weui-cell weui-cell_input">
-            <input class="weui-input" maxlength="10" type="number" placeholder="最大输入长度为10" value="-1" name="seed" />
+          <view class="input-box">
+            <input class="input" maxlength="10" type="number" placeholder="最大输入长度为10" value="-1" name="seed" />
           </view>
         </view>
       </view>
       <Select prop-array='{{selectArray}}' text="Controlnet" bind:myget='getDate' name="controlnet"></Select>
       <block>-0-</block>
       <Select prop-array='{{selectArray}}' text="Lora" bind:myget='getDate' name="lora"></Select>
-      <button style="margin: 30rpx 0" type="primary" form-type="submit">提交</button>
+      <view style="margin-top: 60rpx;display: flex;text-align: center;">
+        <button class="c-btn" form-type="submit" >提交
+        </button>
+    </view>
+      <!-- <button style="margin: 30rpx 0" type="primary" form-type="submit" class="c-btn">提交</button> -->
     </form>
   </view>
 </view>
+
+
+<!-- <view v-show="resultShow" class="super-animation">
+    <view class="user-font">{{ input }}
+    </view>
+    <image style="width: 100%;border-radius: 15rpx" :src="result" mode="widthFix"
+            :show-menu-by-longpress="true"/>
+    <view class="prompt">生成结果由SuperBot Ai提供支持</view>
+    <view style="margin-top: 60rpx;display: flex;text-align: center;">
+        <button click="goOn"
+                class="c-btn">继续
+        </button>
+    </view>
+</view> -->
 

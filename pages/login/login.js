@@ -28,6 +28,13 @@ Page({
       }
   ]
   },
+  upSelfSliderChange(event) {
+    var that = this;
+    var value = event.detail.value;
+    // that.setData({
+    //   upSelfSliderDefault: value
+    // });
+  },
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const form_data = e.detail.value;

@@ -1,1 +1,126 @@
 /* pages/login/login.wxss */
+.c-btn {
+  width: 200rpx;
+  color: white;
+  border-radius: 30rpx;
+  background-color: #aa82e6;
+  font-size: 26rpx
+}
+
+.lang-btn {
+  display: flex;
+  justify-content: space-between
+}
+
+.user-font {
+  font-size: 50rpx;
+  font-weight: 600;
+  color: white;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.lang-box {
+  width: 275rpx;
+  background-color: #181818;
+  text-align: center;
+  color: #ffffff;
+  font-size: 40rpx;
+  padding: 30rpx
+}
+
+.textarea-box {
+  height: 100rpx;
+  margin-top: 20rpx;
+  background-color: #181818;
+  padding: 2%;
+  border-radius: 15rpx
+}
+
+.input-box {
+  margin-top: 20rpx;
+  background-color: #181818;
+  padding: 2%;
+  border-radius: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.input {
+  color: white;
+  width: 100%
+}
+
+.super-animation {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+
+
+.prompt {
+  text-align: right;
+  color: #a1a1a1;
+  margin-top: 15rpx;
+  font-size: 23rpx
+}
+
+.t-btn {
+  width: 400rpx;
+  background-color: #aa82e6;
+  color: white;
+  border-radius: 30rpx;
+  font-size: 30rpx
+}
+
+.t-btn-box {
+  text-align: center;
+  margin-top: 60rpx
+}
+
+page {
+  background-color: #2B2D30;
+}
+
+.page-body {
+  padding: 4%;
+}
+
+.display_text {
+  font-size: 40rpx;
+  color: white;
+  font-weight: 500;
+}
+
+.userShow {
+  margin-bottom: 5px;
+}
+
+.user-font {
+  font-size: 50rpx;
+  font-weight: 600;
+  color: white;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.canvas {
+  margin-top: 380rpx;
+  margin-left: 150rpx;
+  height: 400rpx;
+  width: 400rpx;
+}
+ 
+ wx-slider .wx-slider-handle-wrapper {
+  height: 20rpx;
+}
+
+ .slider-light .wx-slider-track {
+  background: linear-gradient(to right, #4169E1 0%, #00FFFF 100%);
+}
