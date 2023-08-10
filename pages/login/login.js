@@ -17,6 +17,42 @@ Page({
     text: "Controlnet",
     control_id: 0,
     lora_id: 0,
+    loraArray: [
+      {
+        "id": "1",
+        "text": "light_and_shadow.safetensors"
+      }
+    ],
+    conArray: [
+      {
+        "id": "0",
+        "text": "openpose"
+      },
+      {
+        "id": "1",
+        "text": "canny"
+      },
+      {
+        "id": "2",
+        "text": "control_v11f1p_sd15_depth"
+      },
+      {
+        "id": "3",
+        "text": "control_v11p_sd15s2_lineart_anime"
+      },
+      {
+        "id": "4",
+        "text": "control_v11p_sd15_softedge"
+      },
+      {
+        "id": "5",
+        "text": "control_v11p_sd15_canny"
+      },
+      {
+        "id": "6",
+        "text": "control_v11p_sd15_openpose"
+      },
+    ],
     selectArray: [
       {
           "id": "01",

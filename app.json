@@ -2,9 +2,9 @@
   "pages": [
     "pages/login/login",
     "pages/index/index",
+    "pages/result/result",
     "pages/pay/pay",
     "pages/webview/webview",
-    "pages/login",
     "pages/select/select",
     "pages/components/select/select"
   ],
@@ -13,5 +13,23 @@
     "navigationBarBackgroundColor": "#d9d9d9",
     "navigationBarTextStyle": "white"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/login/login",
+      "text": "AI画图",
+      "iconPath": "",
+      "selectedIconPath": ""
+    },{
+      "pagePath": "pages/index/index",
+      "text": "ChatGPT",
+      "iconPath": "",
+      "selectedIconPath": ""
+    },{
+      "pagePath": "pages/result/result",
+      "text": "结果",
+      "iconPath": "",
+      "selectedIconPath": ""
+    }]
+  }
 }

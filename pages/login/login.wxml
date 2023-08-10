@@ -30,7 +30,7 @@
       <view class="section section_gap">
           <text class="display_text">生成图片数量：</text>
           <view class="body-view">
-              <slider class="slider-light" bindchange="slider3change" show-value max="20" min="1" value="1" name="num_samples" />
+              <slider class="slider-light" bindchange="slider3change" show-value max="5" min="1" value="1" name="num_samples" />
           </view>
       </view>
       <view class="section section_gap">
@@ -59,9 +59,9 @@
           </view>
         </view>
       </view>
-      <Select prop-array='{{selectArray}}' text="Controlnet" bind:myget='getDate' name="controlnet"></Select>
+      <Select prop-array='{{conArray}}' text="Controlnet" bind:myget='getDate' name="controlnet"></Select>
       <block>-0-</block>
-      <Select prop-array='{{selectArray}}' text="Lora" bind:myget='getDate' name="lora"></Select>
+      <Select prop-array='{{loraArray}}' text="Lora" bind:myget='getDate' name="lora"></Select>
       <view style="margin-top: 60rpx;display: flex;text-align: center;">
         <button class="c-btn" form-type="submit" >提交
         </button>

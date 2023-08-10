@@ -2,5 +2,7 @@
   "usingComponents": {
     "Select":"../components/select/select"
   },
-  "navigationBarTitleText": "Stable Diffusion"
+  "navigationBarTitleText": "Stable Diffusion",
+  "navigationBarBackgroundColor": "#666",
+  "navigationBarTextStyle": "white"
 }

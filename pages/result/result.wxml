@@ -1,0 +1,4 @@
+<view class="imageBox" wx:for="{{listData}}" wx:key="index">
+    <view>图片{{index+1}}</view>
+    <image src="{{item.imgUrl}}" bindtap="previewSqs" data-src="{{item.imgUrl}}"></image>
+</view>
