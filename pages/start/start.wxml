@@ -1,7 +1,3 @@
-<!--start.wxml-->
-<view class="record-area">
-  <button class="get-record" style="opacity:{{breathNum}}" > 文字呼吸效果 </button>
-</view>
 <view class="container">
   <view class="remind-box" wx:if="{{remind}}">
     <image class="remind-img" src="/images/more/loading.gif"></image>
@@ -11,14 +7,9 @@
       <view class="index_wrap" style='height:{{winH}}rpx;'>
         <view class="index_story_text">{{audio_text}}</view>
       </view>
-      <!-- <view class="hd" style="transform:rotateZ({{angle}}deg);">
-        <image class="logo" src="{{userInfo.avatarUrl}}"></image>
-        <image class="wave" src="/images/more/wave.png" mode="aspectFill"></image>
-        <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
-      </view> -->
       <view class="bd">
         <view class="confirm-btn" bindtap='goToIndex'>
-          <text >AI之旅</text>
+          <text class="get-record" style="opacity:{{breathNum}}">AI之旅</text>
         </view>
         <text class="copyright">AI贡献</text>
       </view>

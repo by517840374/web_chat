@@ -19,21 +19,15 @@
     "list": [
       {
         "pagePath": "pages/login/login",
-        "text": "AI画图",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "AI画图"
       },
       {
         "pagePath": "pages/index/index",
-        "text": "ChatGPT",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "ChatGPT"
       },
       {
         "pagePath": "pages/result/result",
-        "text": "结果",
-        "iconPath": "",
-        "selectedIconPath": ""
+        "text": "结果"
       }
     ]
   }

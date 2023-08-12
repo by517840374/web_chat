@@ -32,9 +32,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  reset(){
+    app.util.request({
+      url: '/project/wechat/get_result',
+        method: "GET"
+      }).then(res => {
+        console.log(res.data);
+        this.setData({
+          listData: res.data
+        })
+      })
+  },
   onLoad(options) {
     app.util.request({
-        url: '/auth/get_img',
+        url: '/project/wechat/get_result',
         method: "GET"
       }).then(res => {
         console.log(res.data);

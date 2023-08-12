@@ -36,7 +36,7 @@ util.request = function (option) {
                 //'Content-Type': 'application/x-www-form-urlencoded',
                 'Content-Type': 'application/json',
                 //'X-Token': wx.getStorageSync('token')
-                'Authorization': "Bearer 4moIZYoVVIcR9BR6nYMCPKBQEgjV4E"
+                'Authorization': app.globalData.auth_token,
             },
             timeout: option.timeout ? option.timeout : 60000,
             success: function (res) {

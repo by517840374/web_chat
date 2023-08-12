@@ -26,7 +26,7 @@ Page({
     setInterval(function(){
       if (reduce === true){
         transparency -= 1;
-        if (transparency === 0){
+        if (transparency === 3){
             reduce = false;
         }
       } else if (reduce === false){
@@ -73,6 +73,7 @@ Page({
     innerAduioContext.play()
   },
   goToIndex: function() {
+    // 这边对其登录校验
     wx.switchTab({
       url: '/pages/login/login',
     });
@@ -123,6 +124,6 @@ Page({
       }
     });
     that.audio_init();
-    // that.audio_play();
+    that.audio_play();
   }
 });

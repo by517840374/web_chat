@@ -60,24 +60,6 @@ Page({
       }
   ]
   },
-  text_init(){
-    //文字逐个显示
-    var that = this
-    var story = "华人牌2060款手机傻妞愿意为您服务，请输入开机密码";
-    console.log(story);
-    var i= 0;
-    var time = setInterval(function(){
-        var text = story.substring(0, i);
-        i++;
-        that.setData({
-            audio_text: text
-        });
-        if (text.length == story.length) {
-            console.log("定时器结束！");
-            clearInterval(time);
-        }
-    },200)
-  },
 
   upSelfSliderChange(event) {
     var that = this;
@@ -94,11 +76,16 @@ Page({
     console.log(form_data);
     // send data to server
     app.util.request({
-        url: '/auth/test',
+        url: '/project/wechat/send_sd_message',
         method: "POST",
         data: form_data
     }).then(res => {
-      console.log(res.data);
+      console.log(res);
+      if(res.code == 200){
+        console.log(res.data);
+      }else{
+        console.log(res.msg);
+      }
     })
   },
   getDate:function(e){
@@ -157,7 +144,7 @@ Page({
         if(res.code){
           console.log(res);
           app.util.request({
-              url: '/auth/onlogin',
+              url: '/project/wechat/onlogin',
               method: "POST",
               data: {
                 code: res.code
@@ -177,8 +164,6 @@ Page({
    */
   onLoad(options) {
     var that = this;
-    that.text_init();
-    console.log(31, this);
     if (wx.getUserProfile) {
       that.setData({
         canIUseGetUserProfile: true
