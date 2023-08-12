@@ -4,6 +4,7 @@ App({
     if (this.siteinfo.site_id) {
       this.globalData.site_id = this.siteinfo.site_id;
     }
+    this.globalData.auth_token = this.siteinfo.auth_token;
     const system = wx.getSystemInfoSync().system.toLowerCase()
     if (system.indexOf('android') > -1) {
         this.globalData.system = 'android'
@@ -17,7 +18,8 @@ App({
   globalData: {
     siteroot: '',
     site_id: 0,
-    system: ''
+    system: '',
+    auth_token: ''
   },
   siteinfo: require('./siteinfo.js')
 })

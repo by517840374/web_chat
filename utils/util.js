@@ -25,7 +25,7 @@ util.request = function (option) {
     if (app.globalData.site_id) {
         data.site_id = app.globalData.site_id
     }
-    console.log(data);
+    console.log(app.globalData);
     return new Promise(function (resolve, reject) {
         wx.request({
             url: url,
