@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/start/start",
     "pages/login/login",
     "pages/index/index",
     "pages/result/result",
@@ -15,21 +16,25 @@
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
-    "list": [{
-      "pagePath": "pages/login/login",
-      "text": "AI画图",
-      "iconPath": "",
-      "selectedIconPath": ""
-    },{
-      "pagePath": "pages/index/index",
-      "text": "ChatGPT",
-      "iconPath": "",
-      "selectedIconPath": ""
-    },{
-      "pagePath": "pages/result/result",
-      "text": "结果",
-      "iconPath": "",
-      "selectedIconPath": ""
-    }]
+    "list": [
+      {
+        "pagePath": "pages/login/login",
+        "text": "AI画图",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "ChatGPT",
+        "iconPath": "",
+        "selectedIconPath": ""
+      },
+      {
+        "pagePath": "pages/result/result",
+        "text": "结果",
+        "iconPath": "",
+        "selectedIconPath": ""
+      }
+    ]
   }
 }
