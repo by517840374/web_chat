@@ -17,12 +17,8 @@ Page({
     text: "Controlnet",
     control_id: 0,
     lora_id: 0,
-    loraArray: [
-      {
-        "id": "1",
-        "text": "light_and_shadow.safetensors"
-      }
-    ],
+    winH: 200,
+    audio_text: "",
     conArray: [
       {
         "id": "0",
@@ -64,6 +60,25 @@ Page({
       }
   ]
   },
+  text_init(){
+    //文字逐个显示
+    var that = this
+    var story = "华人牌2060款手机傻妞愿意为您服务，请输入开机密码";
+    console.log(story);
+    var i= 0;
+    var time = setInterval(function(){
+        var text = story.substring(0, i);
+        i++;
+        that.setData({
+            audio_text: text
+        });
+        if (text.length == story.length) {
+            console.log("定时器结束！");
+            clearInterval(time);
+        }
+    },200)
+  },
+
   upSelfSliderChange(event) {
     var that = this;
     var value = event.detail.value;
@@ -136,18 +151,6 @@ Page({
           chaY:0
       });
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
-      })
-    }
-  },
-
   login(){
     wx.login({
       success(res){
@@ -168,28 +171,44 @@ Page({
       }
     })
   },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    var that = this;
+    that.text_init();
+    console.log(31, this);
+    if (wx.getUserProfile) {
+      that.setData({
+        canIUseGetUserProfile: true
+      })
+    }
+  },
+
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-      
+      console.log(2, this);
+      var that = this;
       wx.checkSession({
         success(){
-          console.log("登录中。。。")
+          console.log("登录中。。。");
         },
         fail(){
-          login();
+          that.login();
           console.log("掉线了哟")
         }
       })      
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+      console.log(1, this);
   },
   
   getChooseAvatar(e){

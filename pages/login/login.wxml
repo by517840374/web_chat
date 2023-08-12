@@ -1,3 +1,6 @@
+<view class="index_wrap" style='height:{{winH}}rpx;'>
+   <view class="index_story_text">{{audio_text}}</view>
+</view>
 <view class="container">
   <view class="page-body">
     <form catchsubmit="formSubmit" catchreset="formReset">
