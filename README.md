@@ -1,4 +1,21 @@
-基于[[G-c-chen](https://github.com/G-c-chen/wechat-chatgpt)模板编写
+基于[G-c-chen](https://github.com/G-c-chen/wechat-chatgpt)模板编写
+
+
+
+暂未把siteinfo.js放入进来，siteinfo.js主要信息为下:
+
+```json
+var siteinfo = {
+    'host': "",
+    'site_id': 1,
+    'auth_token': ""
+};
+module.exports = siteinfo;
+```
+
+后续增加会更新
+
+
 
 **不建议做小程序了，风控太严，量一上来就挂了**
 
