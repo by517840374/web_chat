@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "Midjourney",
+  "usingComponents": {
+    "waterfall": "../components/waterfall-layout/waterfall",
+    "waterfall-item": "../components/waterfall-layout/waterfall-item"
+  }
+}

@@ -1,0 +1,23 @@
+<scroll-view 
+  class="waterfall-page-wrapper"
+  scroll-y="{{true}}"
+  lower-threshold="{{200}}"
+  bindscrolltolower="handleScrollLower"
+>
+  <waterfall
+    custom-class="waterfall-box"
+    loading="{{updateLoading}}"
+    isAllLoaded="{{isAllLoaded}}"
+  >
+    <waterfall-item 
+      custom-class="product-item-box"
+      wx:for="{{products}}" 
+      wx:key="index"
+    >
+      <view class="product-item">
+        <image src="{{item.imgUrl}}" bindtap="previewSqs" data-src="{{item.imgUrl}}" mode="widthFix"></image>
+      </view>
+    </waterfall-item>
+  </waterfall>
+
+</scroll-view>
