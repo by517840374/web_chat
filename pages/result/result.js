@@ -6,14 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    listData: [{
-        imgUrl: "https://s1.ax1x.com/2022/04/13/LKIJmj.jpg"
-    }, {
-        imgUrl: "https://s1.ax1x.com/2022/04/13/LKIJmj.jpg"
-    }, {
-        imgUrl: "https://s1.ax1x.com/2022/04/13/LKIqAI.jpg"
-    }],
+    listData: [],
+    updateLoading: false,
+    isAllLoaded: false,
+    is_end: false
   },
+  updatedCount: 0,
   previewSqs(event) {
       // 拿到图片的地址url
       let currentUrl = event.currentTarget.dataset.src;
@@ -33,6 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   reset(){
+    // 待会儿设置下拉刷新
     app.util.request({
       url: '/project/wechat/get_result',
         method: "GET"
@@ -44,15 +43,20 @@ Page({
       })
   },
   onLoad(options) {
+    this.initData();
+  },
+  initData(){
+    var that = this;
     app.util.request({
-        url: '/project/wechat/get_result',
-        method: "GET"
-      }).then(res => {
-        console.log(res.data);
-        this.setData({
-          listData: res.data
-        })
+      url: '/project/wechat/get_result',
+      method: "GET"
+    }).then(res => {
+      console.log(res.data);
+      this.setData({
+        listData: res.data
       })
+      that.updatedCount += 1
+    })
   },
 
   /**
@@ -75,7 +79,27 @@ Page({
   onHide() {
 
   },
-
+  fetchData() {
+    // if (this.is_end) return;
+    this.setData({
+      updateLoading: true,
+    })
+    setTimeout(() => {
+      var that = this;
+      app.util.request({
+        url: '/project/wechat/get_result',
+          method: "GET"
+      }).then(res => {
+        console.log(res.data);
+        this.setData({
+          listData: that.data.listData.concat(res.data),
+          isAllLoaded: res.data.is_end,
+          updateLoading:  false,
+        })
+        that.updatedCount += 1;
+      })
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -87,14 +111,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    this.fetchData();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom() {
-
+  onReachBottom: function () {
+    this.fetchData();
   },
 
   /**

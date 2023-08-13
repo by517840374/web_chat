@@ -1,5 +1,23 @@
-<view class="imageBox" wx:for="{{listData}}" wx:key="index">
-    <view>图片{{index+1}}</view>
-    <image src="{{item.imgUrl}}" bindtap="previewSqs" data-src="{{item.imgUrl}}"></image>
-</view>
-<button bindtap="reset">刷新</button>
+<scroll-view 
+  class="waterfall-page-wrapper"
+  scroll-y="{{true}}"
+  lower-threshold="{{200}}"
+  bindscrolltolower="handleScrollLower"
+>
+  <waterfall
+    custom-class="waterfall-box"
+    loading="{{updateLoading}}"
+    isAllLoaded="{{isAllLoaded}}"
+  >
+    <waterfall-item 
+      custom-class="product-item-box"
+      wx:for="{{listData}}" 
+      wx:key="index"
+    >
+      <view class="product-item">
+        <image src="{{item.imgUrl}}" bindtap="previewSqs" data-src="{{item.imgUrl}}" mode="widthFix"></image>
+      </view>
+    </waterfall-item>
+  </waterfall>
+
+</scroll-view>

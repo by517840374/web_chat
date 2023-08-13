@@ -1,5 +1,8 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "waterfall": "../components/waterfall-layout/waterfall",
+    "waterfall-item": "../components/waterfall-layout/waterfall-item"
+  },
   "navigationBarTitleText": "AI",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#666"

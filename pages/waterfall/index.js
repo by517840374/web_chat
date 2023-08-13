@@ -50,7 +50,6 @@ Page({
           var url = list[i]["url"];
           if(url){
             url = url.replace("minio-local://", "https://s3.adtensor.com");
-            console.log(url);
             mockList.push({"imgUrl": url})
           }
         }
@@ -127,7 +126,6 @@ Page({
       }
     })
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */
