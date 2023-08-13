@@ -8,9 +8,90 @@ Page({
         vip_expire_time: '',
         scrollTop: 0,
         shareTitle: '',
-        shareImage: ''
+        shareImage: '',
+        sum_text: ''
+    },
+    reset_data(msg){
+      var that = this;
+      var lists = that.data.lists.slice(0, -1);
+      var o_list = that.data.lists.pop()
+      var tt = o_list.message[0]
+      tt = tt.replaceAll("正在输入..", "")
+      tt += msg;
+      lists.push({
+        "user": "ChatGPT",
+        "message": [tt]
+      })
+      that.setData({
+        lists: lists,
+        sum_text: tt
+      })
+    },
+    init_websocket(){
+      var that = this;
+      // var heartbeatInterval = null
+      // var heartbeatTimer = null
+      // function startHeartbeat () {
+      //   heartbeatInterval = setInterval(function () {
+      //     wx.sendSocketMessage({
+      //       data: 'ping'
+      //     })
+      //     heartbeatTimer = setTimeout(function () {
+      //       wx.closeSocket()
+      //     }, 5000)
+      //   }, 30000)
+      // }
+      wx.connectSocket({
+        url: 'ws://127.0.0.1:9999',
+        success: function(){
+          // startHeartbeat();
+          console.log("连接成功!")
+        },
+        fail: function(){
+          console.log("连接失败！")
+          // wx.showModal({
+          //   title: '连接失败',
+          //   content: '请检查网络状态',
+          //   showCancel: false,
+          //   success: function () {
+          //     wx.navigateTo({
+          //       url: '../index/index'
+          //     })
+          //   }
+          // })
+        }
+      })
+      wx.onSocketMessage(function (res) {
+        console.log('接收到服务器消息：' + res.data)
+        if(res.data){
+          that.reset_data(res.data)
+        }
+      })
+      wx.onSocketClose(function () {
+        console.log('连接已断开')
+        wx.showModal({
+          title: '连接已断开',
+          content: '是否重新连接？',
+          success: function (res) {
+            if (res.confirm) {
+              wx.connectSocket({
+                url: 'ws://127.0.0.1:9999',
+                success: function () {
+                  console.log('连接成功')
+                },
+                fail: function () {
+                  console.log('连接失败')
+                }
+              })
+            } else if (res.cancel) {
+              wx.navigateBack()
+            }
+          }
+        })
+      })
     },
     onLoad(options) {
+        this.init_websocket();
         if (options.sid) {
             // 分享id
             wx.setStorageSync('sid', options.sid)
@@ -82,36 +163,39 @@ Page({
         })
 
         this.scrollToBottom()
-        app.util.request({
-          url: '/project/chat',
-          data: {
-              message: message
-          },
-          loading: false,
-          timeout: 120000
-        }).then(res => {
-            console.log(res);
-            lists = lists.slice(0, -1)
-            lists.push({
-                user: 'ChatGPT',
-                message: res.data.split("\n")
-            })
-            this.setData({
-                lists: lists
-            })
-
-            this.scrollToBottom()
-            this.getBalance()
-        }).catch(res => {
-            lists = lists.slice(0, -1)
-            lists.push({
-                user: 'ChatGPT',
-                message: ['网络错误，本条消息不扣费。']
-            })
-            this.setData({
-                lists: lists
-            })
+        wx.sendSocketMessage({
+          data: message,
         })
+        // app.util.request({
+        //   url: '/project/chat',
+        //   data: {
+        //       message: message
+        //   },
+        //   loading: false,
+        //   timeout: 120000
+        // }).then(res => {
+        //     console.log(res);
+        //     lists = lists.slice(0, -1)
+        //     lists.push({
+        //         user: 'ChatGPT',
+        //         message: res.data.split("\n")
+        //     })
+        //     this.setData({
+        //         lists: lists
+        //     })
+
+        //     this.scrollToBottom()
+        //     this.getBalance()
+        // }).catch(res => {
+        //     lists = lists.slice(0, -1)
+        //     lists.push({
+        //         user: 'ChatGPT',
+        //         message: ['网络错误，本条消息不扣费。']
+        //     })
+        //     this.setData({
+        //         lists: lists
+        //     })
+        // })
         // 过滤敏感词
         // app.util.request({
         //     url: '/project/wordFilter',

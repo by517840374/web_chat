@@ -28,13 +28,14 @@
             <textarea user-select type="text" model:value="{{message}}" confirm-type="send" bindconfirm="sendConfirm" fixed='true' contenteditable="true" contenteditable="true" auto-height="true" placeholder="输入你的问题"></textarea>
             <button class="btn-send" bindtap="sendText"><image mode="widthFix" src="/images/ic_send.png"></image></button>
         </view>
-        <view class="account" bindtap="toPay" wx:if="{{!vip_expire_time}}">
+        <view class="account" bindtap="reset_data" wx:if="{{!vip_expire_time}}">
             <text class="balance">余额：<text>{{balance}}</text>条</text>
             <view class="btn-pay">充值</view>
         </view>
-        <view class="account" bindtap="toPay" wx:else>
+        <view class="account" bindtap="reset_data" wx:else>
             <text class="balance">VIP到期时间：{{vip_expire_time}}</text>
             <view class="btn-pay">续费</view>
         </view>
     </view>
 </view>
+<rich-text nodes="{{message}}">222</rich-text>
