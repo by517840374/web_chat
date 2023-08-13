@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/login/login",
     "pages/start/start",
+    "pages/login/login",
     "pages/index/index",
     "pages/result/result",
     "pages/pay/pay",
-    "pages/webview/webview",
     "pages/components/select/select",
     "pages/waterfall/index"
   ],
@@ -15,6 +14,7 @@
     "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
   "tabBar": {
     "list": [
       {

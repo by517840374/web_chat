@@ -164,7 +164,7 @@ Page({
 
         this.scrollToBottom()
         wx.sendSocketMessage({
-          data: message,
+          data: "",
         })
         // app.util.request({
         //   url: '/project/chat',

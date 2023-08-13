@@ -38,4 +38,3 @@
         </view>
     </view>
 </view>
-<rich-text nodes="{{message}}">222</rich-text>
