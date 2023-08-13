@@ -21,3 +21,4 @@
   </waterfall>
 
 </scroll-view>
+<button bind:tap="reset">刷新</button>

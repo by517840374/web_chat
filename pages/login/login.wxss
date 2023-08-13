@@ -124,3 +124,29 @@ page {
  .slider-light .wx-slider-track {
   background: linear-gradient(to right, #4169E1 0%, #00FFFF 100%);
 }
+
+.switch-type {
+  display: flex;
+}
+.switch-type .btn:first-child {
+  border-top-right-radius: 10;
+}
+.switch-type .btn:last-child {
+  border-top-left-radius: 10;
+}
+.switch-type .btn {
+  background: #fff;
+  padding: 10rpx;
+  border-radius: 10rpx;
+  width: 80rpx;
+  height: 40rpx;
+  border: 1px solid #eee;
+  text-align: center;
+  line-height: 40rpx;
+  margin: 15rpx;
+}
+.switch-type .btn.active {
+  border: 2rpx solid #007bff;
+  background: #fff;
+  color: #007bff;
+}

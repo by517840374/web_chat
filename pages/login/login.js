@@ -15,8 +15,9 @@ Page({
     posX:100, // 初始位置
     posY:20, // 初始位置
     text: "Controlnet",
-    control_id: 0,
-    lora_id: 0,
+    control_info: "",
+    lora_info: "",
+    model_name: "",
     winH: 200,
     audio_text: "",
     conArray: [
@@ -49,7 +50,7 @@ Page({
         "text": "control_v11p_sd15_openpose"
       },
     ],
-    selectArray: [
+    loraArray: [
       {
           "id": "01",
           "text": "停车A区"
@@ -58,9 +59,65 @@ Page({
           "id": "02",
           "text": "停车B区"
       }
-  ]
+    ],
+    modelArray: [
+      {
+        "id": "01",
+        "text": "stable-diffusion-v1-5"
+      },
+      {
+        "id": "02",
+        "text": "chilloutmix-Ni"
+      },
+      {
+        "id": "03",
+        "text": "deliberate"
+      },
+      {
+        "id": "04",
+        "text": "dreamlike-photoreal-2.0"
+      },
+      {
+        "id": "05",
+        "text": "elldrethSLucidMix_v10"
+      },
+      {
+        "id": "06",
+        "text": "protogenX34OfficialR_1"
+      },
+      {
+        "id": "07",
+        "text": "sd_v2.0"
+      },
+    ],
+    currentSelectTripType: '1:1',
   },
-
+  selected_1: function (e) {
+    console.log(e);
+    this.setData({
+      currentSelectTripType: e.currentTarget.dataset.id
+    })
+  },
+  selected_2: function(e) {
+    this.setData({
+      currentSelectTripType: e.currentTarget.dataset.id
+    })
+  },
+  selected_3: function(e) {
+    this.setData({
+      currentSelectTripType: e.currentTarget.dataset.id
+    })
+  },
+  selected_4: function(e) {
+    this.setData({
+      currentSelectTripType: e.currentTarget.dataset.id
+    })
+  },
+  selected_5: function(e) {
+    this.setData({
+      currentSelectTripType: e.currentTarget.dataset.id
+    })
+  },
   upSelfSliderChange(event) {
     var that = this;
     var value = event.detail.value;
@@ -71,8 +128,10 @@ Page({
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const form_data = e.detail.value;
-    form_data["lora_id"] = this.data.lora_id;
-    form_data["controlent_id"] = this.data.control_id;
+    form_data["lora_info"] = this.data.lora_info;
+    form_data["control_info"] = this.data.control_info;
+    form_data["model_name"] = this.data.model_name;
+    form_data["proportion"] = this.data.currentSelectTripType;
     console.log(form_data);
     // send data to server
     app.util.request({
@@ -92,11 +151,15 @@ Page({
       console.log(e)
       if(e.detail.text == "Controlnet"){
         this.setData({
-          "control_id": e.detail.id
+          "control_info": e.detail.text
+        })
+      }else if(e.detail.text == "Lora"){
+        this.setData({
+          "lora_info": e.detail.text
         })
       }else{
         this.setData({
-          "lora_id": e.detail.id
+          "model_info": e.detail.text
         })
       }
   },

@@ -4,7 +4,7 @@
       <view class="userShow">
         <view class="display_text">提示词：</view>
         <view class="textarea-box">
-          <textarea placeholder="图片中展现的词" class="input" name="prompt" />
+          <textarea placeholder="图片中展现的词" auto-focus="false" class="input" name="prompt" />
         </view>
       </view>
       <view class="userShow">
@@ -14,19 +14,19 @@
         </view>
       </view>
 
-      <view class="section section_gap">
+      <!-- <view class="section section_gap">
           <text class="display_text">width：</text>
           <view class="body-view">
               <slider class="slider-light" bindchange="slider3change" block-size="30" show-value max="1024" min="0" value="512" step="8" name="width" />
           </view>
       </view>
-
+      
       <view class="section section_gap">
           <text class="display_text">height:</text>
           <view class="body-view">
               <slider class="slider-light" bindchange="slider3change" show-value max="1024" min="0" value="512" step="8" name="height" />
           </view>
-      </view>
+      </view> -->
       <view class="section section_gap">
           <text class="display_text">生成图片数量：</text>
           <view class="body-view">
@@ -59,17 +59,28 @@
           </view>
         </view>
       </view>
+      <view class="switch-type">
+        <view class="btn {{currentSelectTripType == '2:3' ? 'active' : ''}}" bindtap='selected_1' data-id='2:3'>2:3</view>
+        <view class="btn {{currentSelectTripType == '3:2' ? 'active' : ''}}" bindtap='selected_2' data-id='3:2'>3:2</view>
+        <view class="btn {{currentSelectTripType == '1:1' ? 'active' : ''}}" bindtap='selected_3' data-id='1:1'>1:1</view>
+        <view class="btn {{currentSelectTripType == '9:16' ? 'active' : ''}}" bindtap='selected_4' data-id='9:16'>9:16</view>
+        <view class="btn {{currentSelectTripType == '16:9' ? 'active' : ''}}" bindtap='selected_5' data-id='16:9'>16:9</view>
+      </view>
+      <Select prop-array='{{modelArray}}' text="Model_name" bind:myget='getDate' name="model_name" style="margin-top 10rpx;"></Select>
+      <block>-----</block>
       <Select prop-array='{{conArray}}' text="Controlnet" bind:myget='getDate' name="controlnet"></Select>
-      <block>-0-</block>
+      <block>-----</block>
       <Select prop-array='{{loraArray}}' text="Lora" bind:myget='getDate' name="lora"></Select>
       <view style="margin-top: 60rpx;display: flex;text-align: center;">
         <button class="c-btn" form-type="submit" >提交
         </button>
-    </view>
+      </view>
       <!-- <button style="margin: 30rpx 0" type="primary" form-type="submit" class="c-btn">提交</button> -->
     </form>
   </view>
 </view>
+<view class="display_text">图片比例</view>
+      
 
 
 <!-- <view v-show="resultShow" class="super-animation">
