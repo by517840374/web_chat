@@ -6,7 +6,6 @@
     "pages/result/result",
     "pages/pay/pay",
     "pages/webview/webview",
-    "pages/select/select",
     "pages/components/select/select",
     "pages/waterfall/index"
   ],

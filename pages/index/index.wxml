@@ -6,7 +6,7 @@
                     <view class="avatar"><image mode="widthFix" src="/images/ic_chatgpt_logo.png"></image></view>
                     <view class="text">
                         <view wx:for="{{item.message}}" wx:for-item="text">
-                            <text decode="{{true}}">{{text}}</text>
+                            <text user-select="true" decode="{{true}}">{{text}}</text>
                         </view>
                     </view>
                 </view>
@@ -14,7 +14,7 @@
                     <view class="avatar" style="background: #9aa37e;"><text>{{item.user}}</text></view>
                     <view class="text">
                         <view wx:for="{{item.message}}" wx:for-item="text">
-                            <text decode="{{true}}">{{text}}</text>
+                            <text user-select="true" decode="{{true}}">{{text}}</text>
                         </view>
                     </view>
                 </view>
@@ -25,7 +25,7 @@
 
     <view class="box-input">
         <view class="input">
-            <textarea type="text" model:value="{{message}}" confirm-type="send" bindconfirm="sendConfirm" fixed='true' contenteditable="true" contenteditable="true" auto-height="true" placeholder="输入你的问题"></textarea>
+            <textarea user-select type="text" model:value="{{message}}" confirm-type="send" bindconfirm="sendConfirm" fixed='true' contenteditable="true" contenteditable="true" auto-height="true" placeholder="输入你的问题"></textarea>
             <button class="btn-send" bindtap="sendText"><image mode="widthFix" src="/images/ic_send.png"></image></button>
         </view>
         <view class="account" bindtap="toPay" wx:if="{{!vip_expire_time}}">
