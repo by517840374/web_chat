@@ -91,7 +91,7 @@ Page({
       })
     },
     onLoad(options) {
-        this.init_websocket();
+        // this.init_websocket();
         if (options.sid) {
             // 分享id
             wx.setStorageSync('sid', options.sid)
@@ -163,39 +163,39 @@ Page({
         })
 
         this.scrollToBottom()
-        wx.sendSocketMessage({
-          data: "",
-        })
-        // app.util.request({
-        //   url: '/project/chat',
-        //   data: {
-        //       message: message
-        //   },
-        //   loading: false,
-        //   timeout: 120000
-        // }).then(res => {
-        //     console.log(res);
-        //     lists = lists.slice(0, -1)
-        //     lists.push({
-        //         user: 'ChatGPT',
-        //         message: res.data.split("\n")
-        //     })
-        //     this.setData({
-        //         lists: lists
-        //     })
-
-        //     this.scrollToBottom()
-        //     this.getBalance()
-        // }).catch(res => {
-        //     lists = lists.slice(0, -1)
-        //     lists.push({
-        //         user: 'ChatGPT',
-        //         message: ['网络错误，本条消息不扣费。']
-        //     })
-        //     this.setData({
-        //         lists: lists
-        //     })
+        // wx.sendSocketMessage({
+        //   data: "",
         // })
+        app.util.request({
+          url: '/project/chat',
+          data: {
+              message: message
+          },
+          loading: false,
+          timeout: 120000
+        }).then(res => {
+            console.log(res);
+            lists = lists.slice(0, -1)
+            lists.push({
+                user: 'ChatGPT',
+                message: res.data.split("\n")
+            })
+            this.setData({
+                lists: lists
+            })
+
+            this.scrollToBottom()
+            this.getBalance()
+        }).catch(res => {
+            lists = lists.slice(0, -1)
+            lists.push({
+                user: 'ChatGPT',
+                message: ['网络错误，本条消息不扣费。']
+            })
+            this.setData({
+                lists: lists
+            })
+        })
         // 过滤敏感词
         // app.util.request({
         //     url: '/project/wordFilter',
